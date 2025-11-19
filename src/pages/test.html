@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ShareGuy</title>
+    <script type="module" src="./js/main.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <style>
+      :root {
+        --primary-blue: #1a73e8;
+        --light-blue: #e8f0fe;
+        --dark-blue: #0d47a1;
+        --white: #ffffff;
+        --light-gray: #f8f9fa;
+        --medium-gray: #dadce0;
+        --dark-gray: #5f6368;
+        --text-dark: #202124;
+        --shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.19),
+          0 6px 6px rgba(0, 0, 0, 0.23);
+        --border-radius: 8px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Oswald", sans-serif;
+        background-color: var(--light-gray);
+        color: var(--text-dark);
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header Styles */
+      .header {
+        background-color: var(--white);
+        box-shadow: var(--shadow);
+        padding: 20px 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .header__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .header__logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .header__logo-icon {
+        color: var(--primary-blue);
+        font-size: 28px;
+      }
+
+      .header__logo-text {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--primary-blue);
+      }
+
+      .header__nav {
+        display: flex;
+        gap: 30px;
+      }
+
+      .header__nav-link {
+        text-decoration: none;
+        color: var(--text-dark);
+        font-weight: 500;
+        font-size: 18px;
+        transition: color 0.3s;
+        position: relative;
+      }
+
+      .header__nav-link:hover {
+        color: var(--primary-blue);
+      }
+
+      .header__nav-link--active {
+        color: var(--primary-blue);
+      }
+
+      .header__nav-link--active::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: var(--primary-blue);
+        border-radius: 3px;
+      }
+
+      /* Main Content Styles */
+      .main {
+        padding: 60px 0;
+      }
+
+      .section {
+        background-color: var(--white);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        padding: 40px;
+        margin-bottom: 40px;
+      }
+
+      .section__title {
+        font-size: 32px;
+        font-weight: 600;
+        margin-bottom: 30px;
+        color: var(--primary-blue);
+        text-align: center;
+        position: relative;
+      }
+
+      .section__title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background-color: var(--primary-blue);
+        border-radius: 2px;
+      }
+
+      /* Upload Section */
+      .upload {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+
+      .upload__area {
+        border: 2px dashed var(--medium-gray);
+        border-radius: var(--border-radius);
+        padding: 40px 20px;
+        text-align: center;
+        transition: all 0.3s;
+        background-color: var(--light-gray);
+      }
+
+      .upload__area:hover {
+        border-color: var(--primary-blue);
+        background-color: var(--light-blue);
+      }
+
+      .upload__area-icon {
+        font-size: 60px;
+        color: var(--primary-blue);
+        margin-bottom: 20px;
+      }
+
+      .upload__area-title {
+        font-size: 22px;
+        font-weight: 500;
+        margin-bottom: 15px;
+      }
+
+      .upload__area-text {
+        color: var(--dark-gray);
+        margin-bottom: 25px;
+      }
+
+      .upload__area-button {
+        background-color: var(--primary-blue);
+        color: var(--white);
+        border: none;
+        border-radius: var(--border-radius);
+        padding: 12px 25px;
+        font-family: "Oswald", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .upload__area-button:hover {
+        background-color: var(--dark-blue);
+      }
+
+      .upload__preview {
+        margin-top: 30px;
+      }
+
+      .upload__preview-title {
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 15px;
+      }
+
+      .upload__file-list {
+        list-style: none;
+        max-height: 200px;
+        overflow-y: auto;
+      }
+
+      .upload__file-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid var(--medium-gray);
+      }
+
+      .upload__file-icon {
+        color: var(--primary-blue);
+        margin-right: 10px;
+      }
+
+      .upload__file-name {
+        flex: 1;
+      }
+
+      .upload__file-size {
+        color: var(--dark-gray);
+      }
+
+      .upload__share {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+      }
+
+      .upload__share-item {
+        background-color: var(--light-gray);
+        border-radius: var(--border-radius);
+        padding: 25px;
+        text-align: center;
+      }
+
+      .upload__share-title {
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 15px;
+      }
+
+      .upload__code {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--primary-blue);
+        letter-spacing: 2px;
+        margin: 15px 0;
+      }
+
+      .upload__qr {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        background-color: var(--white);
+        border: 1px solid var(--medium-gray);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--border-radius);
+      }
+
+      .upload__qr-placeholder {
+        color: var(--dark-gray);
+        text-align: center;
+      }
+
+      .upload__form {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .upload__form-input {
+        flex: 1;
+        padding: 12px 15px;
+        border: 1px solid var(--medium-gray);
+        border-radius: var(--border-radius);
+        font-family: "Oswald", sans-serif;
+        font-size: 16px;
+      }
+
+      .upload__form-button {
+        background-color: var(--primary-blue);
+        color: var(--white);
+        border: none;
+        border-radius: var(--border-radius);
+        padding: 0 20px;
+        font-family: "Oswald", sans-serif;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .upload__form-button:hover {
+        background-color: var(--dark-blue);
+      }
+
+      .upload__scanner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .upload__scanner-icon {
+        font-size: 40px;
+        color: var(--primary-blue);
+      }
+
+      /* Download Section */
+      .download {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+
+      .download__code {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .download__form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .download__form-label {
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .download__form-input {
+        padding: 15px;
+        border: 1px solid var(--medium-gray);
+        border-radius: var(--border-radius);
+        font-family: "Oswald", sans-serif;
+        font-size: 16px;
+      }
+
+      .download__form-button {
+        background-color: var(--primary-blue);
+        color: var(--white);
+        border: none;
+        border-radius: var(--border-radius);
+        padding: 15px;
+        font-family: "Oswald", sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .download__form-button:hover {
+        background-color: var(--dark-blue);
+      }
+
+      .download__qr {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        background-color: var(--light-gray);
+        border-radius: var(--border-radius);
+        padding: 40px;
+      }
+
+      .download__qr-title {
+        font-size: 22px;
+        font-weight: 500;
+      }
+
+      .download__qr-code {
+        width: 200px;
+        height: 200px;
+        background-color: var(--white);
+        border: 1px solid var(--medium-gray);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--border-radius);
+      }
+
+      .download__qr-placeholder {
+        color: var(--dark-gray);
+        text-align: center;
+      }
+
+      /* Footer Styles */
+      .footer {
+        background-color: var(--white);
+        padding: 30px 0;
+        border-top: 1px solid var(--medium-gray);
+      }
+
+      .footer__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .footer__logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .footer__logo-icon {
+        color: var(--primary-blue);
+        font-size: 20px;
+      }
+
+      .footer__logo-text {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--primary-blue);
+      }
+
+      .footer__copyright {
+        color: var(--dark-gray);
+      }
+
+      .footer__links {
+        display: flex;
+        gap: 20px;
+      }
+
+      .footer__link {
+        color: var(--dark-gray);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer__link:hover {
+        color: var(--primary-blue);
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 992px) {
+        .upload,
+        .download {
+          grid-template-columns: 1fr;
+        }
+
+        .header__nav {
+          gap: 20px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header__container {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .section {
+          padding: 30px 20px;
+        }
+
+        .footer__container {
+          flex-direction: column;
+          gap: 20px;
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .header__nav {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .upload__form {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="container header__container">
+        <div class="header__logo">
+          <i class="fas fa-share-alt header__logo-icon"></i>
+          <h1 class="header__logo-text">ShareGuy</h1>
+        </div>
+        <nav class="header__nav">
+          <a href="#upload" class="header__nav-link header__nav-link--active"
+            >Upload Files</a
+          >
+          <a href="#download" class="header__nav-link">Download Files</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+      <div class="container">
+        <!-- Upload Section -->
+        <section id="upload" class="section">
+          <h2 class="section__title">Upload Files</h2>
+          <div class="upload">
+            <div class="upload__files">
+              <div class="upload__area">
+                <i class="fas fa-cloud-upload-alt upload__area-icon"></i>
+                <h3 class="upload__area-title">Select Files to Share</h3>
+                <p class="upload__area-text">
+                  Drag & drop files here or click to browse
+                </p>
+                <button class="upload__area-button">Choose Files</button>
+              </div>
+              <div class="upload__preview">
+                <h4 class="upload__preview-title">Selected Files</h4>
+                <ul class="upload__file-list">
+                  <li class="upload__file-item">
+                    <i class="fas fa-file-pdf upload__file-icon"></i>
+                    <span class="upload__file-name">Project_Report.pdf</span>
+                    <span class="upload__file-size">2.4 MB</span>
+                  </li>
+                  <li class="upload__file-item">
+                    <i class="fas fa-file-image upload__file-icon"></i>
+                    <span class="upload__file-name">Design_Mockup.png</span>
+                    <span class="upload__file-size">1.8 MB</span>
+                  </li>
+                  <li class="upload__file-item">
+                    <i class="fas fa-file-video upload__file-icon"></i>
+                    <span class="upload__file-name">Presentation.mp4</span>
+                    <span class="upload__file-size">15.7 MB</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="upload__share">
+              <div class="upload__share-item">
+                <h4 class="upload__share-title">Download Code</h4>
+                <p class="upload__code">X7B9K2</p>
+                <p>Share this code to allow downloads</p>
+              </div>
+              <div class="upload__share-item">
+                <h4 class="upload__share-title">QR Code</h4>
+                <div class="upload__qr" id="uploadQr">
+                  <div class="upload__qr-placeholder">
+                    <i
+                      class="fas fa-qrcode"
+                      style="font-size: 40px; margin-bottom: 10px"
+                    ></i>
+                    <p>QR Code will appear here after file selection</p>
+                  </div>
+                </div>
+              </div>
+              <div class="upload__share-item">
+                <h4 class="upload__share-title">Email Files</h4>
+                <p>Send download link via email</p>
+                <form class="upload__form">
+                  <input
+                    type="email"
+                    class="upload__form-input"
+                    placeholder="Enter email address"
+                  />
+                  <button type="submit" class="upload__form-button">
+                    Send
+                  </button>
+                </form>
+              </div>
+              <div class="upload__share-item">
+                <div class="upload__scanner">
+                  <i class="fas fa-camera upload__scanner-icon"></i>
+                  <button class="upload__area-button">Open Scanner</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Download Section -->
+        <section id="download" class="section">
+          <h2 class="section__title">Download Files</h2>
+          <div class="download">
+            <div class="download__code">
+              <div class="download__form">
+                <label for="downloadCode" class="download__form-label"
+                  >Enter Download Code</label
+                >
+                <input
+                  type="text"
+                  id="downloadCode"
+                  class="download__form-input"
+                  placeholder="e.g. X7B9K2"
+                />
+                <button class="download__form-button">Download Files</button>
+              </div>
+            </div>
+            <div class="download__qr">
+              <h3 class="download__qr-title">Scan QR Code</h3>
+              <div class="download__qr-code">
+                <div class="download__qr-placeholder">
+                  <i
+                    class="fas fa-mobile-alt"
+                    style="font-size: 40px; margin-bottom: 10px"
+                  ></i>
+                  <p>Scan to receive files</p>
+                </div>
+              </div>
+              <p>Use the scanner in the upload section to scan QR codes</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+      <div class="container footer__container">
+        <div class="footer__logo">
+          <i class="fas fa-share-alt footer__logo-icon"></i>
+          <h2 class="footer__logo-text">ShareGuy</h2>
+        </div>
+        <p class="footer__copyright">© 2023 ShareGuy. All rights reserved.</p>
+        <div class="footer__links">
+          <a href="#" class="footer__link">Privacy Policy</a>
+          <a href="#" class="footer__link">Terms of Service</a>
+          <a href="#" class="footer__link">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
