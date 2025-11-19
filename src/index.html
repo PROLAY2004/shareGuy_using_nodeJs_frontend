@@ -45,15 +45,15 @@
       <div class="container">
         <!-- Upload Section -->
         <section id="uploadSection" class="section">
-          <h2 class="section__title">Upload Files</h2>
           <div class="upload">
             <!-- upload form -->
 
             <form
-              class="upload__files"
+              class="upload__files "
               id="fileUploadform"
               enctype="multipart/form-data"
             >
+              <h2 class="section__title">Upload Files</h2>
               <!-- upload files -->
               <div class="upload__area" id="dropZone">
                 <i class="fas fa-cloud-upload-alt upload__area-icon"></i>
@@ -87,44 +87,74 @@
 
             <!-- share option section -->
             <div class="upload__share d-none" id="shareSection">
-              <div class="upload__share-item">
-                <h4 class="upload__share-title">QR Code</h4>
-                <div class="upload__qr" id="uploadQr">
-                  <div class="upload__qr-placeholder">
-                    <i
-                      class="fas fa-qrcode"
-                      style="font-size: 40px; margin-bottom: 10px"
-                    ></i>
-                    <p>QR Code will appear here after file selection</p>
+              <div class="share__container">
+                <div class="share__card">
+                  <div class="share__header">
+                    <i class="fas fa-qrcode share__icon"></i>
+                    <h3 class="share__title">QR Code</h3>
+                  </div>
+                  <div class="qr__container">
+                    <div class="qr__image-wrapper">
+                      <img
+                        src="https://i.pinimg.com/736x/a8/69/40/a86940a4ed8a69539b341f3c414c47b3.jpg"
+                        alt="QR Code"
+                        class="qr__image"
+                      />
+                    </div>
+                  </div>
+                  <div class="code__section">
+                    <p class="share__code">
+                      X7B9K2
+                      <button class="copy__btn">
+                        <i class="fas fa-copy"></i>
+                      </button>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="share__card">
+                  <div class="share__header">
+                    <i class="fas fa-envelope share__icon"></i>
+                    <h3 class="share__title">Send via Email</h3>
+                  </div>
+                  <form class="email__form">
+                    <div class="input__group">
+                      <input
+                        type="email"
+                        class="email__input"
+                        placeholder="Enter email address"
+                        required
+                      />
+                      <i class="fas fa-at input__icon"></i>
+                    </div>
+                    <button type="submit" class="submit__btn">
+                      <i class="fas fa-paper-plane"></i>
+                      Send Files
+                    </button>
+                  </form>
+
+                  <div class="divider">
+                    <span class="divider__text">OR</span>
+                  </div>
+
+                  <div class="scanner__section">
+                    <button class="scanner__btn">
+                      <i class="fas fa-camera"></i>
+                      Open Scanner
+                    </button>
+                    <p class="scanner__hint">
+                      Scan QR of Download Section to send files
+                    </p>
                   </div>
                 </div>
               </div>
 
-              <div class="upload__share-item">
-                <h4 class="upload__share-title">Download Code</h4>
-                <p class="upload__code">X7B9K2</p>
-                <p>Share this code to allow downloads</p>
-              </div>
-
-              <div class="upload__share-item">
-                <h4 class="upload__share-title">Email Files</h4>
-                <p>Send download link via email</p>
-                <form class="upload__form">
-                  <input
-                    type="email"
-                    class="upload__form-input"
-                    placeholder="Enter email address"
-                  />
-                  <button type="submit" class="upload__form-button">
-                    Send
-                  </button>
-                </form>
-              </div>
-              <div class="upload__share-item">
-                <div class="upload__scanner">
-                  <i class="fas fa-camera upload__scanner-icon"></i>
-                  <button class="upload__area-button">Open Scanner</button>
-                </div>
+              <!-- Add this new section for the End Session button -->
+              <div class="session__actions">
+                <button class="end-session__btn btn btn-primary">
+                  <i class="fas fa-check-circle"></i>
+                  Complete Transfer
+                </button>
               </div>
             </div>
           </div>

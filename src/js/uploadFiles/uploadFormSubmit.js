@@ -1,3 +1,7 @@
+const filesInput = document.getElementById("selectFiles");
+const fileUploadform = document.getElementById("fileUploadform");
+const shareSection = document.getElementById("shareSection");
+
 export function uploadFiles(event) {
   event.preventDefault();
 
