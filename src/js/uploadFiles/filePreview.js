@@ -8,8 +8,8 @@ const rows = document.getElementById("rows");
 const filesPreviewSection = document.getElementById("filesPreviewSection");
 const toastSection = document.getElementById("toastSection");
 
-export function showPreview(event) {
-  const files = event.target.files;
+
+export function showPreview(files) {
   let count = 0;
 
   for (let i = 0; i < files.length; i++) {
