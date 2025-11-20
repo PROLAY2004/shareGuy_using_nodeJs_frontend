@@ -5,6 +5,14 @@ const shareSection = document.getElementById("shareSection");
 export function uploadFiles(event) {
   event.preventDefault();
 
+  shareSection.classList.remove("d-none");
+  fileUploadform.classList.add("d-none");
+
+  // show Alert if someone want to reload page while a ongoing session
+  window.addEventListener("beforeunload", function (event) {
+    event.preventDefault();
+  });
+
   const formData = new FormData();
 
   console.log("submitting...");
@@ -17,7 +25,4 @@ export function uploadFiles(event) {
   for (const pair of formData.entries()) {
     console.log(pair[0], pair[1]);
   }
-
-  shareSection.classList.remove("d-none");
-  fileUploadform.classList.add("d-none");
 }
