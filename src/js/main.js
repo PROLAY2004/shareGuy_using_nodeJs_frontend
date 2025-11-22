@@ -5,7 +5,8 @@ import "../scss/styles.scss";
 import * as bootstrap from "bootstrap";
 
 import "./operations.js";
+
+// upload Files
 import "./uploadFiles/fileUpload.js";
 import "./uploadFiles/dropFile.js";
-
 
