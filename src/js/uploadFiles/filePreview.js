@@ -8,7 +8,6 @@ const rows = document.getElementById("rows");
 const filesPreviewSection = document.getElementById("filesPreviewSection");
 const toastSection = document.getElementById("toastSection");
 
-
 export function showPreview(files) {
   let count = 0;
 
@@ -57,7 +56,7 @@ export function showPreview(files) {
       }
     } else {
       toastSection.innerHTML = displayToast.errorToast(
-        `${nameList[0]} is more than 20MB`
+        `${nameList[0]} is more than 20MB`,
       );
 
       setTimeout(() => {
