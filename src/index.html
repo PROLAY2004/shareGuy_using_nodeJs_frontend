@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -42,6 +42,13 @@
 
     <!-- Main Content -->
     <main class="main">
+      <div class="spinner-overlay d-none" id="spinner">
+        <button class="btn btn-primary spinner" type="button" disabled>
+          <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
+          <span role="status">Uploading...</span>
+        </button>
+      </div>
+
       <div class="container">
         <!-- Upload Section -->
         <section id="uploadSection" class="section">
