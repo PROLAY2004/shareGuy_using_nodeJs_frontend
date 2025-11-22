@@ -154,8 +154,7 @@
                 <button
                   type="button"
                   class="end-session__btn btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#completeTransferModal"
+                  onclick="window.location.reload()"
                 >
                   <i class="fas fa-check-circle"></i>Complete Transfer
                 </button>
@@ -215,43 +214,5 @@
         </div>
       </div>
     </footer>
-
-    <!-- Complete Transfer Modal -->
-    <div
-      class="modal fade"
-      id="completeTransferModal"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="staticBackdropLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">
-              Warning!
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">Are you sure? This action will terminate the session.</div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Confirm</button>
-          </div>
-        </div>
-      </div>
-    </div>
   </body>
 </html>
