@@ -4,6 +4,8 @@ const filesInput = document.getElementById("selectFiles");
 const fileUploadform = document.getElementById("fileUploadform");
 const shareSection = document.getElementById("shareSection");
 const spinner = document.getElementById("spinner");
+const qrImage = document.getElementById("qrImage");
+const uniCodeArea = document.getElementById("uniCodeArea");
 
 export async function uploadFiles(event) {
   try {
@@ -29,12 +31,14 @@ export async function uploadFiles(event) {
       body: formData,
     });
 
+    const data = await res.json();
+
     spinner.classList.add("d-none");
     shareSection.classList.remove("d-none");
     fileUploadform.classList.add("d-none");
 
-    // const data = await res.json();
-    console.log(res);
+    qrImage.setAttribute("src", data.session.qrPath);
+    uniCodeArea.innerHTML = data.session.code;
   } catch (err) {
     console.log(err.message);
   }

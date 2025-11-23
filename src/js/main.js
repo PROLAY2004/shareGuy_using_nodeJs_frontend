@@ -9,3 +9,4 @@ import "./operations.js";
 // upload Files
 import "./uploadFiles/fileUpload.js";
 import "./uploadFiles/dropFile.js";
+import "./uploadFiles/copyCode.js";
