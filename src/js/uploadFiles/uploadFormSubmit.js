@@ -11,11 +11,11 @@ export async function uploadFiles(event) {
   try {
     event.preventDefault();
 
-    // show Alert if someone want to reload page while a ongoing session
-    window.addEventListener("beforeunload", function (event) {
-      event.preventDefault();
-      event.returnValue = "";
-    });
+    // // show Alert if someone want to reload page while a ongoing session
+    // window.addEventListener("beforeunload", function (event) {
+    //   event.preventDefault();
+    //   event.returnValue = "";
+    // });
 
     const formData = new FormData();
 

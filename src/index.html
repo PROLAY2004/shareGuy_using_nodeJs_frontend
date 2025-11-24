@@ -103,18 +103,14 @@
                   </div>
                   <div class="qr__container">
                     <div class="qr__image-wrapper">
-                      <img
-                        id="qrImage"
-                        alt="QR Code"
-                        class="qr__image"
-                      />
+                      <img id="qrImage" alt="QR Code" src="https://miro.medium.com/v2/resize:fit:884/1*-JnNIWBMCJkRYqGOuMkJ5Q.gif" class="qr__image" />
                     </div>
                   </div>
                   <div class="code__section">
                     <p class="share__code">
                       <span id="uniCodeArea"></span>
                       <button class="copy__btn" id="copyCodeBtn">
-                        <i class="fas fa-copy" ></i>
+                        <i class="fas fa-copy"></i>
                       </button>
                     </p>
                   </div>
@@ -162,7 +158,8 @@
                 <button
                   type="button"
                   class="end-session__btn btn btn-primary"
-                  onclick="window.location.reload()"
+                  data-bs-toggle="modal"
+                  data-bs-target="#completeTransferModal"
                 >
                   <i class="fas fa-check-circle"></i>Complete Transfer
                 </button>
@@ -222,5 +219,42 @@
         </div>
       </div>
     </footer>
+
+
+    <!-- complete Tranfer Modal -->
+    <div
+      class="modal fade"
+      id="completeTransferModal"
+      tabindex="-1"
+      aria-labelledby="completeTransferModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="completeTransferModalLabel">
+              Confirm Complete
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">Are you sure? Terminating this transfer will remove all access.</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
