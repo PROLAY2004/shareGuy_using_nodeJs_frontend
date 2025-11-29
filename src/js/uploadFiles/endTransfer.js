@@ -5,6 +5,10 @@ const displayToast = new ToastTemplates();
 const endTransferBtn = document.getElementById("endTransferBtn");
 const toastSection = document.getElementById("toastSection");
 
+endTransferBtn.addEventListener("click", () => {
+  window.location.reload();
+});
+
 export default async function endTransfer() {
   try {
     const code = endTransferBtn.getAttribute("data-code");
@@ -23,6 +27,8 @@ export default async function endTransfer() {
 
     if (!data.success) {
       toastSection.innerHTML = displayToast.errorToast(data.message);
+    } else {
+      window.location.reload();
     }
   } catch (err) {
     toastSection.innerHTML = displayToast.errorToast(err.message);

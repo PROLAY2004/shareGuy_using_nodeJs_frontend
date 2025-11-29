@@ -1,4 +1,5 @@
 import configaration from "../config/config.js";
+import endTransfer from "./endTransfer.js";
 
 const filesInput = document.getElementById("selectFiles");
 const fileUploadform = document.getElementById("fileUploadform");
@@ -12,11 +13,8 @@ export async function uploadFiles(event) {
   try {
     event.preventDefault();
 
-    // // show Alert if someone want to reload page while a ongoing session
-    // window.addEventListener("beforeunload", function (event) {
-    //   event.preventDefault();
-    //   event.returnValue = "";
-    // });
+    // show Alert if someone want to reload page while a ongoing session
+    window.addEventListener("beforeunload", endTransfer);
 
     const formData = new FormData();
 

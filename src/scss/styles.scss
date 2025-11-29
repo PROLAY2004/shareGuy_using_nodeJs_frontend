@@ -547,6 +547,13 @@ body::before {
   border-radius: var(--border-radius);
   font-family: inherit;
   font-size: 16px;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+  }
 }
 
 .download__form-button {
@@ -558,6 +565,7 @@ body::before {
   font-family: inherit;
   font-size: 18px;
   font-weight: 500;
+  width: 100%;
   cursor: pointer;
   transition: background-color 0.3s;
 
@@ -574,7 +582,6 @@ body::before {
   gap: 20px;
   background-color: var(--light-gray);
   border-radius: var(--border-radius);
-  padding: 40px;
 }
 
 .download__qr-title {
