@@ -6,6 +6,7 @@ const shareSection = document.getElementById("shareSection");
 const spinner = document.getElementById("spinner");
 const qrImage = document.getElementById("qrImage");
 const uniCodeArea = document.getElementById("uniCodeArea");
+const endTransferBtn = document.getElementById("endTransferBtn");
 
 export async function uploadFiles(event) {
   try {
@@ -39,6 +40,8 @@ export async function uploadFiles(event) {
 
     qrImage.setAttribute("src", data.session.qrPath);
     uniCodeArea.innerHTML = data.session.code;
+
+    endTransferBtn.setAttribute("data-code", data.session.code);
   } catch (err) {
     console.log(err.message);
   }

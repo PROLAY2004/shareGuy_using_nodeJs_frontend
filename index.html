@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ShareGuy</title>
-    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./src/js/main.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -103,7 +103,12 @@
                   </div>
                   <div class="qr__container">
                     <div class="qr__image-wrapper">
-                      <img id="qrImage" alt="QR Code" src="https://miro.medium.com/v2/resize:fit:884/1*-JnNIWBMCJkRYqGOuMkJ5Q.gif" class="qr__image" />
+                      <img
+                        id="qrImage"
+                        alt="QR Code"
+                        src="https://miro.medium.com/v2/resize:fit:884/1*-JnNIWBMCJkRYqGOuMkJ5Q.gif"
+                        class="qr__image"
+                      />
                     </div>
                   </div>
                   <div class="code__section">
@@ -220,7 +225,6 @@
       </div>
     </footer>
 
-
     <!-- complete Tranfer Modal -->
     <div
       class="modal fade"
@@ -242,7 +246,9 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">Are you sure? Terminating this transfer will remove all access.</div>
+          <div class="modal-body">
+            Are you sure? Terminating this transfer will remove all access.
+          </div>
           <div class="modal-footer">
             <button
               type="button"
@@ -251,7 +257,9 @@
             >
               Close
             </button>
-            <button type="button" class="btn btn-primary">Confirm</button>
+            <button type="button" id="endTransferBtn" class="btn btn-primary">
+              Confirm
+            </button>
           </div>
         </div>
       </div>
