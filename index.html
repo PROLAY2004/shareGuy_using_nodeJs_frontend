@@ -178,31 +178,56 @@
           <h2 class="section__title">Download Files</h2>
           <div class="download">
             <div class="download__code">
-              <div class="download__form">
-                <label for="downloadCode" class="download__form-label"
-                  >Enter Download Code</label
-                >
-                <input
-                  type="text"
-                  id="downloadCode"
-                  class="download__form-input"
-                  placeholder="e.g. X7B9K2"
-                />
-                <button class="download__form-button">Download Files</button>
-              </div>
+              <form class="download__form" id="downloadForm">
+                <div class="download__header">
+                  <i class="fas fa-download download__icon"></i>
+                  <h3 class="download__title">Enter Download Code</h3>
+                </div>
+                <p class="download__description">
+                  Enter the unique code provided by the sender to access your
+                  files
+                </p>
+
+                <div class="input__group download__input-group">
+                  <input
+                    type="text"
+                    id="downloadCode"
+                    class="download__form-input"
+                    placeholder="e.g. X7B9K2"
+                  />
+                  <i class="fas fa-key input__icon"></i>
+                </div>
+
+                <button class="download__form-button">
+                  <i class="fas fa-download"></i>
+                  Download Files
+                </button>
+
+                <div class="download__hint">
+                  <i class="fas fa-info-circle"></i>
+                  <span
+                    >Codes are case-sensitive and expire once the transfer ends.</span
+                  >
+                </div>
+              </form>
             </div>
+
             <div class="download__qr">
-              <h3 class="download__qr-title">Scan QR Code</h3>
-              <div class="download__qr-code">
-                <div class="download__qr-placeholder">
-                  <i
-                    class="fas fa-mobile-alt"
-                    style="font-size: 40px; margin-bottom: 10px"
-                  ></i>
-                  <p>Scan to receive files</p>
+              <div class="download__qr-header">
+                <i class="fas fa-qrcode download__qr-icon"></i>
+                <h3 class="download__qr-title">Scan QR Code</h3>
+              </div>
+              <div class="download__qr-container">
+                <div class="download__qr-code">
+                  <div class="download__qr-placeholder">
+                    
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVSI6bYOpnK7OBoSg8yuoodPKXlPLlovjmUg&s" alt="DownloadSectionQR">
+                  </div>
                 </div>
               </div>
-              <p>Use the scanner in the upload section to scan QR codes</p>
+              <p class="download__qr-hint">
+                Use the scanner in the upload section to scan QR codes
+              </p>
             </div>
           </div>
         </section>
@@ -264,9 +289,9 @@
         </div>
       </div>
     </div>
-    
+
     <!-- copy code modal -->
-     <div
+    <div
       class="modal fade"
       id="copyCodeModal"
       tabindex="-1"
@@ -301,6 +326,5 @@
         </div>
       </div>
     </div>
-
   </body>
 </html>

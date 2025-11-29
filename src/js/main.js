@@ -11,3 +11,6 @@ import "./uploadFiles/fileUpload.js";
 import "./uploadFiles/dropFile.js";
 import "./uploadFiles/copyCode.js";
 import "./uploadFiles/endTransfer.js";
+
+// download Files
+import './downloadFiles/fileDownload.js'
