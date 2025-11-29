@@ -3,7 +3,6 @@ import { uploadFiles } from "./uploadFormSubmit.js";
 
 const filesInput = document.getElementById("selectFiles");
 const fileUploadform = document.getElementById("fileUploadform");
-const shareSection = document.getElementById("shareSection");
 
 // file uploaded from input field and show preview
 filesInput.addEventListener("change", (event) => {

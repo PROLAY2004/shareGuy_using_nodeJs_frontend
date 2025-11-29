@@ -1,5 +1,13 @@
+import * as bootstrap from "bootstrap";
+import ToastTemplates from "../templates/ToastTemplates.js";
+
+const displayToast = new ToastTemplates();
+const toastSection = document.getElementById("toastSection");
 const copyCodeBtn = document.getElementById("copyCodeBtn");
 const uniCodeArea = document.getElementById("uniCodeArea");
+const copyCodeModal = document.getElementById("copyCodeModal");
+
+const alertModal = new bootstrap.Modal(copyCodeModal);
 
 copyCodeBtn.addEventListener("click", copyCode);
 
@@ -9,9 +17,13 @@ function copyCode() {
   navigator.clipboard
     .writeText(code)
     .then(() => {
-      alert("Coppied");
+      alertModal.show();
     })
     .catch((err) => {
-      console.error("Failed to copy: ", err);
+      toastSection.innerHTML = displayToast.errorToast(err.message);
+
+      setTimeout(() => {
+        toastSection.innerHTML = "";
+      }, 3000);
     });
 }

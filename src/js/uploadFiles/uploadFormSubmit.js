@@ -1,6 +1,9 @@
 import configaration from "../config/config.js";
 import endTransfer from "./endTransfer.js";
+import ToastTemplates from "../templates/ToastTemplates.js";
 
+const displayToast = new ToastTemplates();
+const toastSection = document.getElementById("toastSection");
 const filesInput = document.getElementById("selectFiles");
 const fileUploadform = document.getElementById("fileUploadform");
 const shareSection = document.getElementById("shareSection");
@@ -41,6 +44,10 @@ export async function uploadFiles(event) {
 
     endTransferBtn.setAttribute("data-code", data.session.code);
   } catch (err) {
-    console.log(err.message);
+    toastSection.innerHTML = displayToast.errorToast(err.message);
+
+    setTimeout(() => {
+      toastSection.innerHTML = "";
+    }, 3000);
   }
 }
