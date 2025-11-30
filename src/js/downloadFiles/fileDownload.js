@@ -5,6 +5,7 @@ const displayToast = new ToastTemplates();
 const toastSection = document.getElementById("toastSection");
 const downloadForm = document.getElementById("downloadForm");
 const downloadCode = document.getElementById("downloadCode");
+const spinner = document.getElementById("spinner");
 
 downloadForm.addEventListener("submit", downloadFile);
 
@@ -23,6 +24,8 @@ async function downloadFile(e) {
         "Please Enter Code to Download"
       );
     } else {
+      spinner.classList.remove("d-none");
+
       const response = await fetch(
         `${configaration.BASE_URL}/download/${code}`,
         {
@@ -34,17 +37,24 @@ async function downloadFile(e) {
       );
 
       if (response.ok) {
-        toastSection.innerHTML = displayToast.successToast(data.message);
+        spinner.classList.add("d-none");
+
+        const url = `${configaration.BASE_URL}/download/${code}`;
+        window.open(url, "_blank");
+
+        toastSection.innerHTML = displayToast.successToast(
+          "Your download has started"
+        );
       } else {
         const data = await response.json();
+
+        spinner.classList.add("d-none");
         downloadCode.classList.add("border-danger");
 
         toastSection.innerHTML = displayToast.errorToast(data.message);
       }
     }
   } catch (err) {
-    console.log(err);
-
     toastSection.innerHTML = displayToast.errorToast(err.message);
   } finally {
     setTimeout(() => {
