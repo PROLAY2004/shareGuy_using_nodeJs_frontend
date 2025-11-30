@@ -14,3 +14,4 @@ import "./uploadFiles/endTransfer.js";
 
 // download Files
 import './downloadFiles/fileDownload.js'
+import "./downloadFiles/emailFiles.js";
