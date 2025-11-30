@@ -1,45 +1,58 @@
 import ToastTemplates from "../templates/ToastTemplates.js";
-// import configaration from "../config/config.js";
+import configaration from '../config/config.js';
 
 const displayToast = new ToastTemplates();
-const toastSection = document.getElementById("toastSection");
-const emailFileForm = document.getElementById("emailFileForm");
-const reciverEmail = document.getElementById("reciverEmail");
+const toastSection = document.getElementById('toastSection');
+const emailFileForm = document.getElementById('emailFileForm');
+const reciverEmail = document.getElementById('reciverEmail');
+const endTransferBtn = document.getElementById('endTransferBtn');
+const spinner = document.getElementById('spinner');
 
-emailFileForm.addEventListener("submit", sendFileViaEMail);
-emailFileForm.addEventListener("input", () => {
-  reciverEmail.classList.remove("border-danger");
+emailFileForm.addEventListener('submit', sendFileViaEMail);
+reciverEmail.addEventListener('input', () => {
+	reciverEmail.classList.remove('border-danger');
 });
 
 async function sendFileViaEMail(event) {
-  try {
-    event.preventDefault();
+	try {
+		event.preventDefault();
 
-    const email = reciverEmail.value;
+		const email = reciverEmail.value;
+		const code = endTransferBtn.getAttribute('data-code');
 
-    if (!email) {
-      reciverEmail.classList.add("border-danger");
+		spinner.classList.remove('d-none');
 
-      toastSection.innerHTML = displayToast.errorToast("Please Enter a Email");
-    } else if (!isValidEmail(email)) {
-      reciverEmail.classList.add("border-danger");
+		const response = await fetch(
+			`${configaration.BASE_URL}/download/send-email`,
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					email,
+					code,
+				}),
+			}
+		);
 
-      toastSection.innerHTML = displayToast.errorToast(
-        "Please Enter a Valid Email"
-      );
-    }
+		const data = await response.json();
+		spinner.classList.add('d-none');
 
-    //api call
-  } catch (err) {
-    toastSection.innerHTML = displayToast.errorToast(err.message);
-  } finally {
-    setTimeout(() => {
-      toastSection.innerHTML = "";
-    }, 3000);
-  }
-}
+		if (data.success) {
+			toastSection.innerHTML = displayToast.successToast(data.message);
+		} else {
+			reciverEmail.classList.add('border-danger');
 
-function isValidEmail(email) {
-  const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  return pattern.test(email);
+			toastSection.innerHTML = displayToast.errorToast(data.message);
+		}
+	} catch (err) {
+		reciverEmail.classList.add('border-danger');
+
+		toastSection.innerHTML = displayToast.errorToast(err.message);
+	} finally {
+		setTimeout(() => {
+			toastSection.innerHTML = '';
+		}, 3000);
+	}
 }
