@@ -8,12 +8,17 @@ const downloadCode = document.getElementById("downloadCode");
 
 downloadForm.addEventListener("submit", downloadFile);
 
+downloadCode.addEventListener("input", () => {
+  downloadCode.classList.remove("border-danger");
+});
+
 async function downloadFile(e) {
   e.preventDefault();
   try {
     const code = downloadCode.value;
 
     if (!code) {
+      downloadCode.classList.add("border-danger");
       toastSection.innerHTML = displayToast.errorToast(
         "Please Enter Code to Download"
       );
@@ -32,6 +37,7 @@ async function downloadFile(e) {
         toastSection.innerHTML = displayToast.successToast(data.message);
       } else {
         const data = await response.json();
+        downloadCode.classList.add("border-danger");
 
         toastSection.innerHTML = displayToast.errorToast(data.message);
       }
