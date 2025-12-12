@@ -44,6 +44,7 @@ export async function uploadFiles(event) {
 
     endTransferBtn.setAttribute("data-code", data.session.code);
   } catch (err) {
+    spinner.classList.add('d-none');
     toastSection.innerHTML = displayToast.errorToast(err.message);
 
     setTimeout(() => {
