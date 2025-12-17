@@ -10,11 +10,9 @@ import "./operations.js";
 import "./uploadFiles/fileUpload.js";
 import "./uploadFiles/dropFile.js";
 import "./uploadFiles/copyCode.js";
-import "./uploadFiles/endTransfer.js";
+import './uploadFiles/openScanner.js';
+import './uploadFiles/endTransfer.js';
 
 // download Files
-import './downloadFiles/fileDownload.js'
-import "./downloadFiles/emailFiles.js";
-import hostSocket from './downloadFiles/displayDownloadQr.js';
-
-hostSocket();
+import './downloadFiles/fileDownload.js';
+import './downloadFiles/emailFiles.js';

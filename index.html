@@ -1,329 +1,402 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ShareGuy</title>
-    <script type="module" src="./src/js/main.js" defer></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-  </head>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>ShareGuy</title>
+		<script type="module" src="./src/js/main.js" defer></script>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+	</head>
 
-  <body>
-    <div id="toastSection">
-      <!-- custom toast message -->
-    </div>
+	<body>
+		<div id="toastSection">
+			<!-- custom toast message -->
+		</div>
 
-    <header class="header">
-      <div class="container header__container">
-        <div class="header__logo">
-          <i class="fas fa-share-alt header__logo-icon"></i>
-          <h1 class="header__logo-text">ShareGuy</h1>
-        </div>
-        <nav class="header__nav">
-          <a id="uploadBtn" class="header__nav-link header__nav-link--active"
-            >Upload Files</a
-          >
-          <a class="header__nav-link" id="downloadBtn">Download Files</a>
-        </nav>
-      </div>
-    </header>
+		<header class="header">
+			<div class="container header__container">
+				<div class="header__logo">
+					<i class="fas fa-share-alt header__logo-icon"></i>
+					<h1 class="header__logo-text">ShareGuy</h1>
+				</div>
+				<nav class="header__nav">
+					<a id="uploadBtn" class="header__nav-link header__nav-link--active"
+						>Upload Files</a
+					>
+					<a class="header__nav-link" id="downloadBtn">Download Files</a>
+				</nav>
+			</div>
+		</header>
 
-    <!-- Main Content -->
-    <main class="main">
-      <div class="spinner-overlay d-none" id="spinner">
-        <button class="btn btn-primary spinner" type="button" disabled>
-          <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
-          <span role="status">Please Wait...</span>
-        </button>
-      </div>
+		<!-- Main Content -->
+		<main class="main">
+			<div class="spinner-overlay d-none" id="spinner">
+				<button class="btn btn-primary spinner" type="button" disabled>
+					<span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
+					<span role="status">Please Wait...</span>
+				</button>
+			</div>
 
-      <div class="container">
-        <!-- Upload Section -->
-        <section id="uploadSection" class="section">
-          <div class="upload">
-            <!-- upload form -->
+			<div class="container">
+				<!-- Upload Section -->
+				<section id="uploadSection" class="section">
+					<div class="upload">
+						<!-- upload form -->
 
-            <form
-              class="upload__files"
-              id="fileUploadform"
-              enctype="multipart/form-data"
-              method="post"
-            >
-              <h2 class="section__title">Upload Files</h2>
-              <!-- upload files -->
-              <div class="upload__area" id="dropZone">
-                <i class="fas fa-cloud-upload-alt upload__area-icon"></i>
-                <h3 class="upload__area-title">Select Files to Share</h3>
-                <p class="upload__area-text">
-                  Drag & drop files here or click to browse
-                </p>
+						<form
+							class="upload__files d-none"
+							id="fileUploadform"
+							enctype="multipart/form-data"
+							method="post"
+						>
+							<h2 class="section__title">Upload Files</h2>
+							<!-- upload files -->
+							<div class="upload__area" id="dropZone">
+								<i class="fas fa-cloud-upload-alt upload__area-icon"></i>
+								<h3 class="upload__area-title">Select Files to Share</h3>
+								<p class="upload__area-text">
+									Drag & drop files here or click to browse
+								</p>
 
-                <label for="selectFiles" class="upload__area-button"
-                  >Choose Files</label
-                >
-                <input
-                  type="file"
-                  name="uploadedFile"
-                  class="d-none"
-                  id="selectFiles"
-                  multiple
-                />
-              </div>
-              <!-- <span class="text-danger">MAX FILE SIZE 20MB</span> -->
+								<label for="selectFiles" class="upload__area-button"
+									>Choose Files</label
+								>
+								<input
+									type="file"
+									name="uploadedFile"
+									class="d-none"
+									id="selectFiles"
+									multiple
+								/>
+							</div>
+							<!-- <span class="text-danger">MAX FILE SIZE 20MB</span> -->
 
-              <!-- upload preview -->
-              <div class="upload__preview d-none" id="filesPreviewSection">
-                <h4 class="upload__preview-title">Selected Files</h4>
-                <ul class="upload__file-list p-0" id="rows">
-                  <!-- files will displayed here -->
-                </ul>
-                <button class="upload__area-button">Upload</button>
-              </div>
-            </form>
+							<!-- upload preview -->
+							<div class="upload__preview d-none" id="filesPreviewSection">
+								<h4 class="upload__preview-title">Selected Files</h4>
+								<ul class="upload__file-list p-0" id="rows">
+									<!-- files will displayed here -->
+								</ul>
+								<button class="upload__area-button">Upload</button>
+							</div>
+						</form>
 
-            <!-- share option section -->
-            <div class="upload__share d-none" id="shareSection">
-              <div class="share__container">
-                <div class="share__card">
-                  <div class="share__header">
-                    <i class="fas fa-qrcode share__icon"></i>
-                    <h3 class="share__title">QR Code</h3>
-                  </div>
-                  <div class="qr__container">
-                    <div class="qr__image-wrapper">
-                      <img
-                        id="qrImage"
-                        alt="QR Code"
-                        src="https://miro.medium.com/v2/resize:fit:884/1*-JnNIWBMCJkRYqGOuMkJ5Q.gif"
-                        class="qr__image"
-                      />
-                    </div>
-                  </div>
-                  <div class="code__section">
-                    <p class="share__code">
-                      <span id="uniCodeArea"></span>
-                      <button class="copy__btn" id="copyCodeBtn">
-                        <i class="fas fa-copy"></i>
-                      </button>
-                    </p>
-                  </div>
-                </div>
+						<!-- share option section -->
+						<div class="upload__share" id="shareSection">
+							<div class="share__container">
+								<div class="share__card">
+									<div class="share__header">
+										<i class="fas fa-qrcode share__icon"></i>
+										<h3 class="share__title">QR Code</h3>
+									</div>
+									<div class="qr__container">
+										<div class="qr__image-wrapper">
+											<img
+												id="qrImage"
+												alt="QR Code"
+												src="https://miro.medium.com/v2/resize:fit:884/1*-JnNIWBMCJkRYqGOuMkJ5Q.gif"
+												class="qr__image"
+											/>
+										</div>
+									</div>
+									<div class="code__section">
+										<p class="share__code">
+											<span id="uniCodeArea"></span>
+											<button class="copy__btn" id="copyCodeBtn">
+												<i class="fas fa-copy"></i>
+											</button>
+										</p>
+									</div>
+								</div>
 
-                <div class="share__card">
-                  <div class="share__header">
-                    <i class="fas fa-envelope share__icon"></i>
-                    <h3 class="share__title">Send via Email</h3>
-                  </div>
-                  <form class="email__form" id="emailFileForm">
-                    <div class="input__group">
-                      <input
-                        type="text"
-                        class="email__input"
-                        id="reciverEmail"
-                        placeholder="Enter email address"
-                      />
-                      <i class="fas fa-at input__icon"></i>
-                    </div>
-                    <button type="submit" class="submit__btn">
-                      <i class="fas fa-paper-plane"></i>
-                      Send Files
-                    </button>
-                  </form>
+								<div class="share__card">
+									<div class="share__header">
+										<i class="fas fa-envelope share__icon"></i>
+										<h3 class="share__title">Send via Email</h3>
+									</div>
+									<form class="email__form" id="emailFileForm">
+										<div class="input__group">
+											<input
+												type="text"
+												class="email__input"
+												id="reciverEmail"
+												placeholder="Enter email address"
+											/>
+											<i class="fas fa-at input__icon"></i>
+										</div>
+										<button type="submit" class="submit__btn">
+											<i class="fas fa-paper-plane"></i>
+											Send Files
+										</button>
+									</form>
 
-                  <div class="divider">
-                    <span class="divider__text">OR</span>
-                  </div>
+									<div class="divider">
+										<span class="divider__text">OR</span>
+									</div>
 
-                  <div class="scanner__section">
-                    <button class="scanner__btn">
-                      <i class="fas fa-camera"></i>
-                      Open Scanner
-                    </button>
-                    <p class="scanner__hint">
-                      Scan QR of Download Section to send files
-                    </p>
-                  </div>
-                </div>
-              </div>
+									<div class="scanner__section">
+										<button class="scanner__btn" id="openScannerBtn">
+											<i class="fas fa-camera"></i>
+											Open Scanner
+										</button>
+										<p class="scanner__hint">
+											Scan QR of Download Section to send files
+										</p>
+									</div>
+								</div>
+							</div>
 
-              <!-- Add this new section for the End Session button -->
-              <div class="session__actions">
-                <button
-                  type="button"
-                  class="end-session__btn btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#completeTransferModal"
-                >
-                  <i class="fas fa-check-circle"></i>Complete Transfer
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
+							<!-- Add this new section for the End Session button -->
+							<div class="session__actions">
+								<button
+									type="button"
+									class="end-session__btn btn btn-primary"
+									data-bs-toggle="modal"
+									data-bs-target="#completeTransferModal"
+								>
+									<i class="fas fa-check-circle"></i>Complete Transfer
+								</button>
+							</div>
+						</div>
+					</div>
+				</section>
 
-        <!-- Download Section -->
-        <section id="downloadSection" class="section d-none">
-          <h2 class="section__title">Download Files</h2>
-          <div class="download">
-            <div class="download__code">
-              <form class="download__form" id="downloadForm">
-                <div class="download__header">
-                  <i class="fas fa-download download__icon"></i>
-                  <h3 class="download__title">Enter Download Code</h3>
-                </div>
-                <p class="download__description">
-                  Enter the unique code provided by the sender to access your
-                  files
-                </p>
+				<!-- Download Section -->
+				<section id="downloadSection" class="section d-none">
+					<h2 class="section__title">Download Files</h2>
+					<div class="download">
+						<div class="download__code">
+							<form class="download__form" id="downloadForm">
+								<div class="download__header">
+									<i class="fas fa-download download__icon"></i>
+									<h3 class="download__title">Enter Download Code</h3>
+								</div>
+								<p class="download__description">
+									Enter the unique code provided by the sender to access your
+									files
+								</p>
 
-                <div class="input__group download__input-group">
-                  <input
-                    type="text"
-                    id="downloadCode"
-                    class="download__form-input"
-                    placeholder="e.g. X7B9K2"
-                  />
-                  <i class="fas fa-key input__icon"></i>
-                </div>
+								<div class="input__group download__input-group">
+									<input
+										type="text"
+										id="downloadCode"
+										class="download__form-input"
+										placeholder="e.g. X7B9K2"
+									/>
+									<i class="fas fa-key input__icon"></i>
+								</div>
 
-                <button class="download__form-button">
-                  <i class="fas fa-download"></i>
-                  Download Files
-                </button>
+								<button class="download__form-button">
+									<i class="fas fa-download"></i>
+									Download Files
+								</button>
 
-                <div class="download__hint">
-                  <i class="fas fa-info-circle"></i>
-                  <span
-                    >Codes are case-sensitive and expire once the transfer ends.</span
-                  >
-                </div>
-              </form>
-            </div>
+								<div class="download__hint">
+									<i class="fas fa-info-circle"></i>
+									<span
+										>Codes are case-sensitive and expire once the transfer
+										ends.</span
+									>
+								</div>
+							</form>
+						</div>
 
-            <div class="download__qr">
-              <div class="download__qr-header">
-                <i class="fas fa-qrcode download__qr-icon"></i>
-                <h3 class="download__qr-title">Scan QR Code</h3>
-              </div>
-              <div class="download__qr-container">
-                <div class="download__qr-code">
-                  <div class="download__qr-placeholder">
-                    
-                    <img class="qr__image" id="downloadQR" src="https://miro.medium.com/v2/resize:fit:884/1*-JnNIWBMCJkRYqGOuMkJ5Q.gif" alt="DownloadSectionQR">
-                  </div>
-                </div>
-              </div>
-              <p class="download__qr-hint">
-                Use the scanner in the upload section to scan QR codes
-              </p>
-            </div>
-          </div>
-        </section>
-      </div>
-    </main>
+						<div class="download__qr">
+							<div class="download__qr-header">
+								<i class="fas fa-qrcode download__qr-icon"></i>
+								<h3 class="download__qr-title">Scan QR Code</h3>
+							</div>
+							<div class="download__qr-container">
+								<div class="download__qr-code">
+									<div class="download__qr-placeholder">
+										<img
+											class="qr__image"
+											id="downloadQR"
+											src="https://miro.medium.com/v2/resize:fit:884/1*-JnNIWBMCJkRYqGOuMkJ5Q.gif"
+											alt="DownloadSectionQR"
+										/>
+									</div>
+								</div>
+							</div>
+							<p class="download__qr-hint">
+								Use the scanner in the upload section to scan QR codes
+							</p>
+						</div>
+					</div>
+				</section>
+			</div>
+		</main>
 
-    <!-- Footer Section -->
-    <footer class="footer">
-      <div class="container footer__container">
-        <div class="footer__logo">
-          <i class="fas fa-share-alt footer__logo-icon"></i>
-          <h2 class="footer__logo-text">ShareGuy</h2>
-        </div>
-        <p class="footer__copyright">© 2023 ShareGuy. All rights reserved.</p>
-        <div class="footer__links">
-          <a href="#" class="footer__link">Privacy Policy</a>
-          <a href="#" class="footer__link">Terms of Service</a>
-          <a href="#" class="footer__link">Contact</a>
-        </div>
-      </div>
-    </footer>
+		<!-- Footer Section -->
+		<footer class="footer">
+			<div class="container footer__container">
+				<div class="footer__logo">
+					<i class="fas fa-share-alt footer__logo-icon"></i>
+					<h2 class="footer__logo-text">ShareGuy</h2>
+				</div>
+				<p class="footer__copyright">© 2023 ShareGuy. All rights reserved.</p>
+				<div class="footer__links">
+					<a href="#" class="footer__link">Privacy Policy</a>
+					<a href="#" class="footer__link">Terms of Service</a>
+					<a href="#" class="footer__link">Contact</a>
+				</div>
+			</div>
+		</footer>
 
-    <!-- complete Tranfer Modal -->
-    <div
-      class="modal fade"
-      id="completeTransferModal"
-      tabindex="-1"
-      aria-labelledby="completeTransferModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="completeTransferModalLabel">
-              Confirm Complete
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            Are you sure? Terminating this transfer will remove all access.
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" id="endTransferBtn" class="btn btn-primary">
-              Confirm
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+		<!-- complete Tranfer Modal -->
+		<div
+			class="modal fade"
+			id="completeTransferModal"
+			tabindex="-1"
+			aria-labelledby="completeTransferModalLabel"
+			aria-hidden="true"
+		>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="completeTransferModalLabel">
+							Confirm Complete
+						</h1>
+						<button
+							type="button"
+							class="btn-close"
+							data-bs-dismiss="modal"
+							aria-label="Close"
+						></button>
+					</div>
+					<div class="modal-body">
+						Are you sure? Terminating this transfer will remove all access.
+					</div>
+					<div class="modal-footer">
+						<button
+							type="button"
+							class="btn btn-secondary"
+							data-bs-dismiss="modal"
+						>
+							Close
+						</button>
+						<button type="button" id="endTransferBtn" class="btn btn-primary">
+							Confirm
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
-    <!-- copy code modal -->
-    <div
-      class="modal fade"
-      id="copyCodeModal"
-      tabindex="-1"
-      aria-labelledby="copyCodeModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="copyCodeModalLabel">
-              Code Copied
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            The code has been copied successfully to your clipboard.
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
+		<!-- copy code modal -->
+		<div
+			class="modal fade"
+			id="copyCodeModal"
+			tabindex="-1"
+			aria-labelledby="copyCodeModalLabel"
+			aria-hidden="true"
+		>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="copyCodeModalLabel">
+							Code Copied
+						</h1>
+						<button
+							type="button"
+							class="btn-close"
+							data-bs-dismiss="modal"
+							aria-label="Close"
+						></button>
+					</div>
+					<div class="modal-body">
+						The code has been copied successfully to your clipboard.
+					</div>
+					<div class="modal-footer">
+						<button
+							type="button"
+							class="btn btn-secondary"
+							data-bs-dismiss="modal"
+						>
+							Close
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- QR Scanner Modal -->
+		<div class="modal fade" id="scannerModal" tabindex="-1" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-lg">
+				<div class="modal-content rouded-4">
+					<!-- Header -->
+					<div class="modal-header text-white bg-primary">
+						<i class="fas fa-qrcode fs-4 me-2"></i>
+						<h5 class="modal-title">QR Code Scanner</h5>
+						<button
+							type="button"
+							class="btn-close btn-close-white"
+							data-bs-dismiss="modal"
+						></button>
+					</div>
+
+					<!-- Body -->
+					<div class="modal-body">
+						<div class="row g-4">
+							<!-- Scanner -->
+							<div class="col-lg-6">
+								<div class="scanner-box">
+									<video id="scannerVideo" playsinline></video>
+
+									<div class="scanner-frame">
+										<span class="corner tl"></span>
+										<span class="corner tr"></span>
+										<span class="corner bl"></span>
+										<span class="corner br"></span>
+										<span class="scan-line"></span>
+									</div>
+
+									<div class="scanner-placeholder" id="scannerOverlay">
+										<i class="fas fa-camera fs-1 mb-2"></i>
+										<p class="mb-0">Allow camera access to scan QR</p>
+									</div>
+								</div>
+
+								<div class="alert alert-primary mt-3 py-2">
+									<i class="fas fa-info-circle me-2"></i>
+									<span id="scannerStatus">Point camera at QR code</span>
+								</div>
+							</div>
+
+							<!-- Result -->
+							<div class="col-lg-6">
+								<div class="result-box">
+									<h6 class="mb-3">Scanned Result</h6>
+
+									<div class="result-code mb-3" id="scannedCode">
+										No QR code scanned
+									</div>
+
+									<button
+										class="btn btn-primary w-100"
+										id="sendFileBtn"
+										disabled
+									>
+										<i class="fas fa-paper-plane me-2"></i>
+										Send File to This Device
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
