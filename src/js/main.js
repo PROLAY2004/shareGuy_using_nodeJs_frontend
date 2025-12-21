@@ -4,15 +4,19 @@ import "../scss/styles.scss";
 // Import all of Bootstrap’s JS
 import * as bootstrap from "bootstrap";
 
-import "./operations.js";
+import './operations.js';
+import initSocket from './socket/initSocket.js';
 
 // upload Files
-import "./uploadFiles/fileUpload.js";
-import "./uploadFiles/dropFile.js";
-import "./uploadFiles/copyCode.js";
+import './uploadFiles/fileUpload.js';
+import './uploadFiles/dropFile.js';
+import './uploadFiles/copyCode.js';
 import './uploadFiles/openScanner.js';
 import './uploadFiles/endTransfer.js';
 
 // download Files
 import './downloadFiles/fileDownload.js';
 import './downloadFiles/emailFiles.js';
+
+pageContent.style.display = 'block';
+await initSocket();

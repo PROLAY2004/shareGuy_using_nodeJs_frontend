@@ -20,6 +20,8 @@ function showUploadSection() {
 }
 
 function showDownloadSection() {
+	hostSocket();
+
 	// Change Active Button
 	uploadBtn.classList.remove('header__nav-link--active');
 	downloadBtn.classList.add('header__nav-link--active');
@@ -27,6 +29,4 @@ function showDownloadSection() {
 	// change Section Contents
 	uploadSection.classList.add('d-none');
 	downloadSection.classList.remove('d-none');
-
-	hostSocket();
 }

@@ -2,7 +2,10 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, user-scalable=no"
+		/>
 		<title>ShareGuy</title>
 		<script type="module" src="./src/js/main.js" defer></script>
 		<link
@@ -19,7 +22,7 @@
 		/>
 	</head>
 
-	<body>
+	<body style="display: none" id="pageContent">
 		<div id="toastSection">
 			<!-- custom toast message -->
 		</div>
@@ -55,7 +58,7 @@
 						<!-- upload form -->
 
 						<form
-							class="upload__files d-none"
+							class="upload__files"
 							id="fileUploadform"
 							enctype="multipart/form-data"
 							method="post"
@@ -93,7 +96,7 @@
 						</form>
 
 						<!-- share option section -->
-						<div class="upload__share" id="shareSection">
+						<div class="upload__share d-none" id="shareSection">
 							<div class="share__container">
 								<div class="share__card">
 									<div class="share__header">
@@ -112,7 +115,7 @@
 									</div>
 									<div class="code__section">
 										<p class="share__code">
-											<span id="uniCodeArea"></span>
+											<span id="uniCodeArea">123XYZ</span>
 											<button class="copy__btn" id="copyCodeBtn">
 												<i class="fas fa-copy"></i>
 											</button>
@@ -333,7 +336,7 @@
 
 		<!-- QR Scanner Modal -->
 		<div class="modal fade" id="scannerModal" tabindex="-1" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content rouded-4">
 					<!-- Header -->
 					<div class="modal-header text-white bg-primary">
@@ -350,7 +353,7 @@
 					<div class="modal-body">
 						<div class="row g-4">
 							<!-- Scanner -->
-							<div class="col-lg-6">
+							<div class="col">
 								<div class="scanner-box">
 									<video id="scannerVideo" playsinline></video>
 
@@ -366,32 +369,23 @@
 										<i class="fas fa-camera fs-1 mb-2"></i>
 										<p class="mb-0">Allow camera access to scan QR</p>
 									</div>
+
+									<div class="scanner-placeholder" id="restartScanner">
+										<button class="btn btn-primary"
+											><i class="fas fa-undo me-2"></i>Restart Camera</button
+										>
+									</div>
 								</div>
 
 								<div class="alert alert-primary mt-3 py-2">
 									<i class="fas fa-info-circle me-2"></i>
 									<span id="scannerStatus">Point camera at QR code</span>
 								</div>
-							</div>
 
-							<!-- Result -->
-							<div class="col-lg-6">
-								<div class="result-box">
-									<h6 class="mb-3">Scanned Result</h6>
-
-									<div class="result-code mb-3" id="scannedCode">
-										No QR code scanned
-									</div>
-
-									<button
-										class="btn btn-primary w-100"
-										id="sendFileBtn"
-										disabled
-									>
-										<i class="fas fa-paper-plane me-2"></i>
-										Send File to This Device
-									</button>
-								</div>
+								<button class="btn btn-primary w-100" id="sendFileBtn" disabled>
+									<i class="fas fa-paper-plane me-2"></i>
+									Send File to This Device
+								</button>
 							</div>
 						</div>
 					</div>
