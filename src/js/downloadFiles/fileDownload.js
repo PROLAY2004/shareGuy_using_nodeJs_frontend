@@ -27,7 +27,7 @@ export async function downloadFile(code) {
 			spinner.classList.remove('d-none');
 
 			const response = await fetch(
-				`${configaration.BASE_URL}/download/${code}`,
+				`${configaration.BASE_URL}/download/${code.toUpperCase()}`,
 				{
 					method: 'GET',
 					headers: {
