@@ -22,7 +22,7 @@ export function showPreview(files) {
 		const nameList = fileName.split('.');
 		const extension = nameList[nameList.length - 1];
 
-		if (files[i].size < 20971520) {
+		if (files[i].size < 1073741824) {
 			count += 1;
 
 			if (extension === 'pdf') {
@@ -61,7 +61,7 @@ export function showPreview(files) {
 			}
 		} else {
 			toastSection.innerHTML = displayToast.errorToast(
-				`${nameList[0]} is more than 20MB`
+				`${nameList[0]} is more than 1GB`
 			);
 
 			setTimeout(() => {
