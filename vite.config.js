@@ -2,17 +2,11 @@ export default {
   build: {
     outDir: "../dist",
   },
- server: {
-    host: "0.0.0.0",
-    port: process.env.PORT || 8080,
-    allowedHosts: ["shareguy.azurewebsites.net"],
-  },
 
-  preview: {
-    host: "0.0.0.0",
-    port: process.env.PORT || 8080,
-    allowedHosts: ["shareguy.azurewebsites.net"],
-  },
+  server: {
+		port: 8080,
+	},
+  
   // Optional: Silence Sass deprecation warnings. See note below.
   css: {
     preprocessorOptions: {
